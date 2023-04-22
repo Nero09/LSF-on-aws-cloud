@@ -44,6 +44,10 @@ Mappings:
       CentOS75: ami-045f38c93733dd48d
       FPGADev: ami-051c91d3186bfdb7d
       ALinux2: ami-0d7ed3ddb85b521a6
+    cn-northwest-1:  
+      CentOS75: ami-9887c6e7
+      FPGADev: ami-0cf12acd587e51b42
+      ALinux2: ami-01d038c6487288308
 
 Parameters:
   AdminKeyPair:
@@ -88,23 +92,23 @@ Parameters:
       The S3 URI to the LSF installation script package. 
       Select object in the console and choose Copy Path and paste here.
     Type: "String"
-    Default: "s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf10.1_lsfinstall_linux_x86_64.tar.Z"
+    Default: "s3://lsfcluster-cn/spectrum-lsf/lsf10.1_lsfinstall_linux_x86_64.tar.Z"
   CustomerLSFBinsUri:
     Description: The S3 URI to the LSF 10.1 Linux base distribution package. 
       Select object in the console and choose Copy Path and paste here.
     Type: "String"
-    Default: "s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64.tar.Z"
+    Default: "s3://lsfcluster-cn/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64.tar.Z"
   CustomerLSFFixPackUri:
     Description: >
       The S3 URI to the LSF 10.1 Fix Pack package. This must the lastest cumulative Fix Pack package.
       Select package object in the console and choose Copy Path and paste here.
     Type: "String"
-    Default: "s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z"
+    Default: "s3://lsfcluster-cn/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z"
   CustomerLSFEntitlementUri:
     Description: The S3 URI to the LSF entitlement file, lsf_std_entitlement.dat or lsf_adv_entitlement.dat.
       Select object in the S3 console and choose Copy Path and paste here.
     Type: String
-    Default: s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf_std_entitlement.dat
+    Default: s3://lsfcluster-cn/spectrum-lsf/lsf_std_entitlement.dat
   DCVUserName:
     Type: String
     Default: simuser
@@ -123,11 +127,13 @@ Resources:
         - RegionMap
         - !Ref AWS::Region
         - !Ref MasterServerAMI
-      #SubnetId: !Join [ '-', [ !Ref LSFClusterName,"PrivateSubnet" ] ]
-      SubnetId: "subnet-042e9a6fe5ac775ae"
-      #SecurityGroupIds: !Join [ '-', [ !Ref LSFClusterName,"LSFMasterSG" ] ]
-      SecurityGroupIds: 
-        - "sg-0269b79b1458b8110"
+      #SubnetId: "subnet-042e9a6fe5ac775ae"
+      #SecurityGroupIds: 
+      #  - "sg-0269b79b1458b8110"
+      SubnetId:
+          Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"PrivateSubnet" ] ]
+      SecurityGroupIds:
+        - Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"LSFMasterSG" ] ]
       KeyName: !Ref AdminKeyPair
       IamInstanceProfile: !Ref LSFMasterInstanceProfile
       Tags:
@@ -182,7 +188,7 @@ Resources:
               
               #mount NFS file system
               #mount -t nfs -o "rsize=262144,wsize=262144,hard,vers=3,tcp,mountproto=tcp" ${FSxOntapFS}:/vol1 ${FileSystemMountPoint}
-              mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-058eae19f31e70f9f.efs.us-west-1.amazonaws.com:/ ${FileSystemMountPoint}
+              mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-08301ea47f456aeac.efs.cn-northwest-1.amazonaws.com.cn:/ ${FileSystemMountPoint}
 
               #add to fstab
               #echo "${FSxOntapFS}:/vol1 ${FileSystemMountPoint} nfs nfsvers=3,rsize=262144,wsize=262144,tcp,hard 0 0" >> \
@@ -259,7 +265,7 @@ Resources:
                      -e "s|%CFN_COMPUTE_SECURITY_GROUP_ID%|${LSFComputeNodeSGGroupId}|" \
                      -e "s|%CFN_LSF_COMPUTE_NODE_INSTANCE_PROFILE_ARN%|${LSFComputeNodeInstanceProfileArn}|" \
                      -e "s|%CFN_LSF_CLUSTER_NAME%|${LSFClusterName}|" \
-                     -e "s|%CFN_FSXN_SVM_DNS_NAME%|fs-058eae19f31e70f9f.efs.us-west-1.amazonaws.com|" \
+                     -e "s|%CFN_FSXN_SVM_DNS_NAME%|fs-08301ea47f456aeac.efs.cn-northwest-1.amazonaws.com.cn|" \
                      -e "s|%CFN_NFS_MOUNT_POINT%|${FileSystemMountPoint}|" \
                      -e "s|%CFN_LSF_INSTALL_DIR%|$LSF_INSTALL_DIR|" \
                      -e "s|%CFN_DCV_USER_NAME%|${DCVUserName}|" \
@@ -375,9 +381,13 @@ Resources:
             - LSFComputeNodeInstanceProfileArn: !GetAtt LSFComputeNodeInstanceProfile.Arn
               LSFComputeNodeSpotFleetRoleArn: !GetAtt LSFSpotFleetRole.Arn
               LSFComputeNodeAmi: !FindInMap [ RegionMap, !Ref "AWS::Region", !Ref ComputeAMI ]
-              LSFComputeNodeSGGroupId: "sg-0a73ba4530cd30841"
-              LSFComputeNodeSubnet: "subnet-042e9a6fe5ac775ae"
-              FSxOntapFS: "fs-058eae19f31e70f9f.efs.us-west-1.amazonaws.com"
+              #LSFComputeNodeSGGroupId: "sg-0a73ba4530cd30841"
+              #LSFComputeNodeSubnet: "subnet-042e9a6fe5ac775ae"
+              LSFComputeNodeSGGroupId:
+                Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"LSFComputeNodeSG" ] ]
+              LSFComputeNodeSubnet:
+                Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"PrivateSubnet" ] ]
+              FSxOntapFS: "fs-08301ea47f456aeac.efs.cn-northwest-1.amazonaws.com.cn"
 
   LSFMasterRole:
       Type: "AWS::IAM::Role"
