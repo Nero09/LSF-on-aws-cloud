@@ -62,6 +62,10 @@ Mappings:
       CentOS75: ami-045f38c93733dd48d
       FPGADev: ami-051c91d3186bfdb7d
       ALinux2: ami-0d7ed3ddb85b521a6
+    cn-northwest-1:  
+      FPGADev: ami-0fe2d01469fad6578
+      #ALinux2: ami-068dbba1f5ab1bc53 #ALinux2022
+      ALinux2: ami-01d038c6487288308 #ALinux2023
 
 Parameters:
   AdminKeyPair:
@@ -203,11 +207,11 @@ Resources:
 
               # mount points
               # mount -t nfs -o rw,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 ${FSxOntapFS}:/vol1 ${FileSystemMountPoint}
-              mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-058eae19f31e70f9f.efs.us-west-1.amazonaws.com:/ ${FileSystemMountPoint}
+              mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${FSxOntapFS}:/ ${FileSystemMountPoint}
 
               #add to fstab
-              #echo "${FSxOntapFS}:/vol1 ${FileSystemMountPoint} nfs nfsvers=3,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 0 0" >> \
-              #  /etc/fstab
+              echo "${FSxOntapFS}:/ ${FileSystemMountPoint} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev 0 0" >> \
+                /etc/fstab
               
               # create project and scratch directories
               mkdir ${FileSystemMountPoint}/{${ScratchDir},${ProjectDir}} \
