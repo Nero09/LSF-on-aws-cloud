@@ -44,6 +44,10 @@ Mappings:
       CentOS75: ami-045f38c93733dd48d
       FPGADev: ami-051c91d3186bfdb7d
       ALinux2: ami-0d7ed3ddb85b521a6
+    cn-northwest-1:  
+      CentOS75: ami-9887c6e7
+      FPGADev: ami-0cf12acd587e51b42
+      ALinux2: ami-01d038c6487288308
 
 Parameters:
   AdminKeyPair:
