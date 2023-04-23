@@ -89,7 +89,7 @@ Parameters:
   LoginServerAMI:
     Description: "This should be the same AMI that is used for the compute nodes."
     Type: "String"
-    Default: Alinux2
+    Default: ALinux2
     AllowedValues:
       - ALinux2
       - CentOS75
