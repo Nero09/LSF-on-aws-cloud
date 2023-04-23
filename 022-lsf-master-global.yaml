@@ -82,7 +82,7 @@ Parameters:
   FileSystemMountPoint:
     Description: Directory where the FSxN file system will be mounted.
     Type: "String"
-    Default: "/fsxn"
+    Default: "/efs"
   EFSDns:
     Description: DNS of filesystem
     Type: "String"
