@@ -171,12 +171,14 @@ Resources:
               # Install cfn-signal helper script to signal bootstrap completion to CloudFormation
               yum update -y aws-cfn-bootstrap
 
-              # Install LSF installer prereqs
+              # Install LSF installer prereqs, libnsl for lsid, libxcrypt-compt for bhosts
               yum install ed -q -y
               yum install java-1.8.0-openjdk -q -y
               yum install wget -q -y
               yum install vim -q -y
               yum install libnsl* -y
+              yum install libxcrypt-compat
+
 
               # Install SSM so we can use SSM Session Manager and avoid ssh logins.
               yum install -q -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
