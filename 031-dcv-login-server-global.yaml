@@ -184,7 +184,11 @@ Resources:
               export LSF_INSTALL_DIR="${FileSystemMountPoint}${LSFInstallPath}/${LSFClusterName}"
 
               # Update AWS CLI
+              yum install python3-pip -y
+              yum install python-is-python3
               pip3 -q install awscli
+              yum install libnsl* -y
+              yum install libxcrypt-compat -y
 
               # Set DCV username and password
               export SM_PASSWORD=`/usr/local/bin/aws secretsmanager get-secret-value \
@@ -226,6 +230,8 @@ Resources:
 
               ### Install DCV ###
               echo "Installing DCV..."
+
+              sudo mkdir /etc/yum/pluginconf.d
 
               function install_prereqs {
                 # Exclude non-responsive mirror.
