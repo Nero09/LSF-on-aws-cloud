@@ -215,7 +215,8 @@ Resources:
               adduser -m -u 1500 $LSF_ADMIN
 
               # Download customer-provided LSF binaries and entitlement file
-              aws --quiet s3 cp ${CustomerLSFInstallUri} /tmp
+              #aws --quiet s3 cp ${CustomerLSFInstallUri} /tmp
+              aws s3 cp ${CustomerLSFInstallUri} /tmp
               aws --quiet s3 cp ${CustomerLSFBinsUri} /tmp
               aws --quiet s3 cp ${CustomerLSFEntitlementUri} /tmp
               aws --quiet s3 cp ${CustomerLSFFixPackUri} /tmp
