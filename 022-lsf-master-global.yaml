@@ -46,8 +46,8 @@ Mappings:
       ALinux2: ami-0d7ed3ddb85b521a6
     cn-northwest-1:  
       FPGADev: ami-0dc06b9c8f83d2aef
-      #ALinux2: ami-068dbba1f5ab1bc53 #ALinux2022
-      ALinux2: ami-01d038c6487288308 #ALinux2023
+      ALinux2: ami-05e32acd909ec5552 #ALinux2022
+      #ALinux2: ami-01d038c6487288308 #ALinux2023
 
 Parameters:
   AdminKeyPair:
@@ -173,8 +173,8 @@ Resources:
 
               # Install LSF installer prereqs, libnsl for lsid, libxcrypt-compt for bhosts
               yum install ed -q -y
-              # yum install java-1.8.0-openjdk -q -y 
-              yum install java-1.8.0-amazon-corretto-devel -q -y
+              yum install java-1.8.0-openjdk -q -y 
+              #yum install java-1.8.0-amazon-corretto-devel -q -y
               yum install wget -q -y
               yum install vim -q -y
               yum install libnsl* -y
