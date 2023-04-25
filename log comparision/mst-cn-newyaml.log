@@ -1,0 +1,459 @@
++ echo '*** BEGIN LSF MASTER BOOTSTRAP ***'
+*** BEGIN LSF MASTER BOOTSTRAP ***
++ export LSF_INSTALL_DIR=/efs/tools/ibm/lsf/LSFCluster
++ LSF_INSTALL_DIR=/efs/tools/ibm/lsf/LSFCluster
++ export LSF_ADMIN=lsfadmin
++ LSF_ADMIN=lsfadmin
+++ echo s3://lsfcluster-cn/spectrum-lsf/lsf10.1_lsfinstall_linux_x86_64.tar.Z
+++ awk -F / '{print $NF}'
++ export LSF_INSTALL_PKG=lsf10.1_lsfinstall_linux_x86_64.tar.Z
++ LSF_INSTALL_PKG=lsf10.1_lsfinstall_linux_x86_64.tar.Z
+++ echo s3://lsfcluster-cn/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64.tar.Z
+++ awk -F / '{print $NF}'
++ export LSF_BIN_PKG=lsf10.1_linux2.6-glibc2.3-x86_64.tar.Z
++ LSF_BIN_PKG=lsf10.1_linux2.6-glibc2.3-x86_64.tar.Z
+++ echo s3://lsfcluster-cn/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z
+++ awk -F / '{print $NF}'
++ export LSF_FP_PKG=lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z
++ LSF_FP_PKG=lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z
+++ echo s3://lsfcluster-cn/spectrum-lsf/lsf_std_entitlement.dat
+++ awk -F / '{print $NF}'
++ export LSF_ENTITLEMENT=lsf_std_entitlement.dat
++ LSF_ENTITLEMENT=lsf_std_entitlement.dat
++ echo 'Disabling Hyperthreading'
+Disabling Hyperthreading
+++ cut -s -d, -f2-
+++ cat /sys/devices/system/cpu/cpu0/topology/thread_siblings_list /sys/devices/system/cpu/cpu1/topology/thread_siblings_list /sys/devices/system/cpu/cpu2/topology/thread_siblings_list /sys/devices/system/cpu/cpu3/topology/thread_siblings_list /sys/devices/system/cpu/cpu4/topology/thread_siblings_list /sys/devices/system/cpu/cpu5/topology/thread_siblings_list /sys/devices/system/cpu/cpu6/topology/thread_siblings_list /sys/devices/system/cpu/cpu7/topology/thread_siblings_list
+++ tr , '\n'
+++ sort -un
++ for cpunum in $(cat /sys/devices/system/cpu/cpu*/topology/thread_siblings_list | cut -s -d, -f2- | tr ',' '\n' | sort -un)
++ echo 0
++ for cpunum in $(cat /sys/devices/system/cpu/cpu*/topology/thread_siblings_list | cut -s -d, -f2- | tr ',' '\n' | sort -un)
++ echo 0
++ for cpunum in $(cat /sys/devices/system/cpu/cpu*/topology/thread_siblings_list | cut -s -d, -f2- | tr ',' '\n' | sort -un)
++ echo 0
++ for cpunum in $(cat /sys/devices/system/cpu/cpu*/topology/thread_siblings_list | cut -s -d, -f2- | tr ',' '\n' | sort -un)
++ echo 0
++ yum update -y aws-cfn-bootstrap
+Amazon Linux 2023 repository                     27 MB/s |  13 MB     00:00    
+Amazon Linux 2023 Kernel Livepatch repository   611 kB/s | 155 kB     00:00    
+Dependencies resolved.
+Nothing to do.
+Complete!
++ yum install ed -q -y
++ yum install java-1.8.0-openjdk -q -y
+Error: Unable to find a match: java-1.8.0-openjdk
++ yum install wget -q -y
++ yum install vim -q -y
++ yum install 'libnsl*' -y
+Last metadata expiration check: 0:00:02 ago on Sun Apr 23 15:24:38 2023.
+Dependencies resolved.
+================================================================================
+ Package      Architecture Version                      Repository         Size
+================================================================================
+Installing:
+ libnsl       x86_64       2.34-52.amzn2023.0.2         amazonlinux        76 k
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 76 k
+Installed size: 100 k
+Downloading Packages:
+libnsl-2.34-52.amzn2023.0.2.x86_64.rpm          805 kB/s |  76 kB     00:00    
+--------------------------------------------------------------------------------
+Total                                           474 kB/s |  76 kB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : libnsl-2.34-52.amzn2023.0.2.x86_64                     1/1 
+  Running scriptlet: libnsl-2.34-52.amzn2023.0.2.x86_64                     1/1 
+  Verifying        : libnsl-2.34-52.amzn2023.0.2.x86_64                     1/1 
+
+Installed:
+  libnsl-2.34-52.amzn2023.0.2.x86_64                                            
+
+Complete!
++ yum install libxcrypt-compat -y
+Last metadata expiration check: 0:00:03 ago on Sun Apr 23 15:24:38 2023.
+Dependencies resolved.
+================================================================================
+ Package              Arch       Version                  Repository       Size
+================================================================================
+Installing:
+ libxcrypt-compat     x86_64     4.4.33-7.amzn2023        amazonlinux      92 k
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 92 k
+Installed size: 198 k
+Downloading Packages:
+libxcrypt-compat-4.4.33-7.amzn2023.x86_64.rpm   701 kB/s |  92 kB     00:00    
+--------------------------------------------------------------------------------
+Total                                           480 kB/s |  92 kB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : libxcrypt-compat-4.4.33-7.amzn2023.x86_64              1/1 
+  Running scriptlet: libxcrypt-compat-4.4.33-7.amzn2023.x86_64              1/1 
+  Verifying        : libxcrypt-compat-4.4.33-7.amzn2023.x86_64              1/1 
+
+Installed:
+  libxcrypt-compat-4.4.33-7.amzn2023.x86_64                                     
+
+Complete!
++ yum install -q -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
+Could not open: /var/cache/dnf/commandline-ec5dce648b3176ca/packages/amazon-ssm-agent.rpm
++ systemctl enable amazon-ssm-agent
++ systemctl start amazon-ssm-agent
++ mkdir /efs
++ mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-04ffafba4db988c1b.efs.cn-northwest-1.amazonaws.com.cn:/ /efs
++ echo 'fs-04ffafba4db988c1b.efs.cn-northwest-1.amazonaws.com.cn:/ /efs nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev 0 0'
++ mkdir -p /efs/tools/ibm/lsf/LSFCluster
++ mkdir /var/log/lsf
++ chmod 777 /var/log/lsf
++ adduser -m -u 1500 lsfadmin
++ aws --quiet s3 cp s3://lsfcluster-cn/spectrum-lsf/lsf10.1_lsfinstall_linux_x86_64.tar.Z /tmp
++ aws --quiet s3 cp s3://lsfcluster-cn/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64.tar.Z /tmp
++ aws --quiet s3 cp s3://lsfcluster-cn/spectrum-lsf/lsf_std_entitlement.dat /tmp
++ aws --quiet s3 cp s3://lsfcluster-cn/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z /tmp
++ cd /tmp
++ tar xf lsf10.1_lsfinstall_linux_x86_64.tar.Z
++ cp lsf10.1_linux2.6-glibc2.3-x86_64.tar.Z lsf10.1_lsfinstall
++ cd lsf10.1_lsfinstall
++ cat
++ ./lsfinstall -f install.config
+
+
+Extracting JRE package ...
++ source /efs/tools/ibm/lsf/LSFCluster/conf/profile.lsf
+++ LSF_VERSION=10.1
+++ LSF_TOP=/efs/tools/ibm/lsf/LSFCluster
+++ _CUR_PATH_ENV=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+++ PATH=/usr/bin:/bin:/usr/local/bin:/local/bin:/sbin:/usr/sbin:/usr/ucb:/usr/sbin:/usr/bsd:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
++++ echo -n
+++ '[' '' = -n ']'
+++ enf=-n
+++ enl=
+++ export enf enl
+++ LSNULFILE=/dev/null
+++ AWK=
+++ for tmp in nawk /usr/toolbox/nawk gawk awk
+++ for tmp in nawk /usr/toolbox/nawk gawk awk
+++ for tmp in nawk /usr/toolbox/nawk gawk awk
+++ AWK=gawk
+++ break
+++ test gawk = ''
+++ export AWK
++++ uname -a
+++ uname_val='Linux ip-172-30-23-255.cn-northwest-1.compute.internal 6.1.23-36.46.amzn2023.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Apr 10 22:43:13 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux'
+++ LSF_BINARY_TYPE=fail
+++ BINARY_TYPE_HPC=
+++ export LSF_BINARY_TYPE BINARY_TYPE_HPC
++++ echo Linux ip-172-30-23-255.cn-northwest-1.compute.internal 6.1.23-36.46.amzn2023.x86_64 '#1' SMP PREEMPT_DYNAMIC Mon Apr 10 22:43:13 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
++++ gawk '{print $1}'
+++ field1=Linux
+++ case "$field1" in
++++ echo Linux ip-172-30-23-255.cn-northwest-1.compute.internal 6.1.23-36.46.amzn2023.x86_64 '#1' SMP PREEMPT_DYNAMIC Mon Apr 10 22:43:13 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
++++ gawk '{split($3, a, "."); print a[1]}'
+++ version=6
++++ uname -m
+++ _machine=x86_64
++++ ldconfig -p
++++ grep -F libc.so.6
++++ grep -v power9
++++ sed 's/.*=>//'
+++ for glibc in `ldconfig -p | grep -F libc.so.6 | grep -v power9 | sed 's/.*=>//'`
+++ '[' -x /lib64/libc.so.6 ']'
+++ /lib64/libc.so.6
+++ '[' 0 '!=' 0 ']'
++++ /lib64/libc.so.6
++++ grep 'GNU C Library'
++++ gawk '{print substr($0,match($0,/version/))}'
++++ gawk '{print $2}'
++++ gawk -F. '{print $2}'
++++ sed s/,//
+++ _libcver=34
+++ '[' 34 '!=' '' ']'
+++ break
+++ '[' 34 = '' ']'
+++ '[' 6 = 1 ']'
+++ '[' 6 = 2 -o 6 -gt 2 ']'
++++ echo Linux ip-172-30-23-255.cn-northwest-1.compute.internal 6.1.23-36.46.amzn2023.x86_64 '#1' SMP PREEMPT_DYNAMIC Mon Apr 10 22:43:13 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
++++ gawk '{split($3, a, "."); print a[1]"."a[2]}'
+++ subver=6.1
+++ '[' 6.1 = 2.0 ']'
+++ '[' 6.1 = 2.2 ']'
+++ '[' 6.1 = 2.4 ']'
+++ '[' 6.1 = 2.6 -o 6 -gt 2 ']'
+++ LSF_BINARY_TYPE=fail
+++ case "$_machine" in
+++ '[' 34 = 1 ']'
+++ '[' 34 = 2 ']'
+++ '[' 34 = 3 ']'
+++ '[' 34 -ge 4 -a 34 -lt 17 ']'
+++ '[' 34 -ge 17 -a -d /efs/tools/ibm/lsf/LSFCluster/10.1/linux3.10-glibc2.17-x86_64 ']'
+++ '[' 34 -ge 17 ']'
+++ LSF_BINARY_TYPE=linux2.6-glibc2.3-x86_64
+++ is_craylinux_host
+++ '[' -f /opt/cray/rca/default/bin/rca-helper -a -f /etc/opt/cray/sdb/node_classes ']'
+++ '[' -f /etc/node_classes ']'
+++ role=unknown
+++ '[' unknown = login -o unknown = service ']'
+++ '[' -f /etc/opt/cray/release/cle-release ']'
+++ return 1
+++ '[' 1 = 0 ']'
+++ is_bproc_host
+++ '[' -f /usr/lib/libbproc.so ']'
+++ return 1
+++ '[' 1 = 0 ']'
+++ is_slurm_host
+++ _slurm_signature_file=/var/lsf/lsfslurm
+++ '[' -f /var/lsf/lsfslurm ']'
+++ return 1
+++ '[' 1 = 0 ']'
+++ is_rms_host
+++ RMSQUERY=rmsquery
+++ which rmsquery
+++ '[' 1 = 0 ']'
+++ return 1
+++ '[' 1 = 0 ']'
+++ '[' linux2.6-glibc2.3-x86_64 = fail ']'
+++ '[' '' '!=' '' ']'
+++ '[' linux2.6-glibc2.3-x86_64 '!=' trix6 -a linux2.6-glibc2.3-x86_64 '!=' trix6.5.8 -a linux2.6-glibc2.3-x86_64 '!=' trix6.5.24 ']'
+++ LSF_SERVERDIR=/efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/etc
+++ LSF_BINDIR=/efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/bin
+++ LSF_LIBDIR=/efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/lib
+++ env
+++ grep LD_LIBRARY_PATH=
+++ '[' 1 -ne 0 ']'
+++ LD_LIBRARY_PATH=NULL
+++ '[' NULL = NULL ']'
+++ LD_LIBRARY_PATH=/efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/lib
+++ '[' linux2.6-glibc2.3-x86_64 = macosx ']'
+++ '[' linux2.6-glibc2.3-x86_64 = x86-64-sol10 ']'
+++ export LD_LIBRARY_PATH
+++ export DYLD_LIBRARY_PATH
+++ '[' linux2.6-glibc2.3-x86_64 = aix-64 ']'
+++ XLSF_UIDDIR=/efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/lib/uid
+++ LSF_ENVDIR=/efs/tools/ibm/lsf/LSFCluster/conf
+++ _CUR_PATH_ENV=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:
+++ echo /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:
+++ grep /efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/bin
+++ '[' 1 -ne 0 ']'
+++ PATH=/efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:
+++ echo /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:
+++ grep /efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/etc
+++ '[' 1 -ne 0 ']'
+++ PATH=/efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/etc:/efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:
++++ echo /efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/etc:/efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:
++++ sed -e 's/:$//g'
+++ PATH=/efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/etc:/efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+++ '[' -z '' ']'
+++ MANPATH=/efs/tools/ibm/lsf/LSFCluster/10.1/man
+++ uname
+++ grep Linux
+++ '[' 0 = 0 ']'
+++ MANPATH=/efs/tools/ibm/lsf/LSFCluster/10.1/man:
+++ '[' -d /efs/tools/ibm/lsf/LSFCluster/10.1/linux2.6-glibc2.3-x86_64/lib/uid ']'
+++ export LSF_SERVERDIR LSF_BINDIR LSF_LIBDIR LSF_ENVDIR PATH MANPATH
+++ unset LSF_VERSION LSF_BINARY_TYPE enf enl AWK
+++ _lsf_conf=/efs/tools/ibm/lsf/LSFCluster/conf/lsf.conf
+++ '[' '!' -f /efs/tools/ibm/lsf/LSFCluster/conf/lsf.conf ']'
+++ '[' -f /efs/tools/ibm/lsf/LSFCluster/conf/lsf.conf ']'
++++ grep '^[ 	]*LSF_ENABLE_EGO=' /efs/tools/ibm/lsf/LSFCluster/conf/lsf.conf
++++ sed '2,$ d'
++++ sed 's/^.*=//g'
++++ sed 's/"//g'
+++ _lsf_enable_ego=N
+++ '[' N '!=' N -a N '!=' n ']'
+++ unset LSF_TOP
++ cd /efs/tools/ibm/lsf/LSFCluster/10.1/install
++ cp /tmp/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z .
++ echo schmod_demand.so
++ ./patchinstall --silent lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z
+
+Checking the LSF installation directory /efs/tools/ibm/lsf/LSFCluster ...
+Done checking the LSF installation directory /efs/tools/ibm/lsf/LSFCluster.
+
+Checking the patch history directory ...
+Done checking the patch history directory /efs/tools/ibm/lsf/LSFCluster/patch.
+
+Checking the backup directory ...
+Done checking the backup directory /efs/tools/ibm/lsf/LSFCluster/patch/backup.
+
+Installing package "/efs/tools/ibm/lsf/LSFCluster/10.1/install/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z"...
+
+Checking the package definition for /efs/tools/ibm/lsf/LSFCluster/10.1/install/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z ...
+Done checking the package definition for /efs/tools/ibm/lsf/LSFCluster/10.1/install/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z.
+
+Checking integrity for /efs/tools/ibm/lsf/LSFCluster/10.1/install/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z...
+Done checking integrity for /efs/tools/ibm/lsf/LSFCluster/10.1/install/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z.
+
+Preparing updated file list...
+Done preparing updated file list.
+
+Backing up existing files ...
+Finished backing up files to "/efs/tools/ibm/lsf/LSFCluster/patch/backup/LSF_linux2.6-glibc2.3-x86_64_601088".
+
+Updating existing files ...
+Finished updating files.
+
+Updating the patch history ...
+Finished updating the patch history.
+
+Done installing /efs/tools/ibm/lsf/LSFCluster/10.1/install/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z.
+
+This patch has updated binaries or library files that affect running daemons.
+To make the changes take effect, you must restart your cluster.
+
+Exiting...
++ mkdir -p /efs/tools/ibm/lsf/LSFCluster/conf/resource_connector/aws/conf
++ chown -R lsfadmin:root /efs/tools/ibm/lsf/LSFCluster/conf/resource_connector/aws
++ wget https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/hostProviders.json -O /efs/tools/ibm/lsf/LSFCluster/conf/resource_connector/hostProviders.json
+--2023-04-23 15:30:13--  https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/hostProviders.json
+Resolving s3.amazonaws.com (s3.amazonaws.com)... 52.216.97.101, 52.216.41.232, 54.231.161.216, ...
+Connecting to s3.amazonaws.com (s3.amazonaws.com)|52.216.97.101|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 207 [application/json]
+Saving to: ‘/efs/tools/ibm/lsf/LSFCluster/conf/resource_connector/hostProviders.json’
+
+     0K                                                       100% 9.06M=0s
+
+2023-04-23 15:30:14 (9.06 MB/s) - ‘/efs/tools/ibm/lsf/LSFCluster/conf/resource_connector/hostProviders.json’ saved [207/207]
+
++ wget https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/awsprov_config.json -O /efs/tools/ibm/lsf/LSFCluster/conf/resource_connector/aws/conf/awsprov_config.json
+--2023-04-23 15:30:14--  https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/awsprov_config.json
+Resolving s3.amazonaws.com (s3.amazonaws.com)... 52.216.54.152, 54.231.229.176, 52.216.61.200, ...
+Connecting to s3.amazonaws.com (s3.amazonaws.com)|52.216.54.152|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 111 [application/json]
+Saving to: ‘/efs/tools/ibm/lsf/LSFCluster/conf/resource_connector/aws/conf/awsprov_config.json’
+
+     0K                                                       100% 13.5M=0s
+
+2023-04-23 15:30:15 (13.5 MB/s) - ‘/efs/tools/ibm/lsf/LSFCluster/conf/resource_connector/aws/conf/awsprov_config.json’ saved [111/111]
+
++ sed -i -e s/_CFN_AWS_REGION_/cn-northwest-1/ /efs/tools/ibm/lsf/LSFCluster/conf/resource_connector/aws/conf/awsprov_config.json
++ wget https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/awsprov_templates.json -O /efs/tools/ibm/lsf/LSFCluster/conf/resource_connector/aws/conf/awsprov_templates.json
+--2023-04-23 15:30:15--  https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/awsprov_templates.json
+Resolving s3.amazonaws.com (s3.amazonaws.com)... 52.216.97.101, 52.216.54.152, 54.231.229.176, ...
+Connecting to s3.amazonaws.com (s3.amazonaws.com)|52.216.97.101|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 8435 (8.2K) [application/json]
+Saving to: ‘/efs/tools/ibm/lsf/LSFCluster/conf/resource_connector/aws/conf/awsprov_templates.json’
+
+     0K ........                                              100%  155M=0s
+
+2023-04-23 15:30:17 (155 MB/s) - ‘/efs/tools/ibm/lsf/LSFCluster/conf/resource_connector/aws/conf/awsprov_templates.json’ saved [8435/8435]
+
++ sed -i -e 's|%CFN_COMPUTE_AMI%|ami-01d038c6487288308|' -e 's|%CFN_COMPUTE_NODE_SUBNET%|subnet-0172784c5252d247c|' -e 's|%CFN_ADMIN_KEYPAIR%|aiocn|' -e 's|%CFN_COMPUTE_SECURITY_GROUP_ID%|sg-0f6d574adc0028d7a|' -e 's|%CFN_LSF_COMPUTE_NODE_INSTANCE_PROFILE_ARN%|arn:aws-cn:iam::871772259371:instance-profile/EDA-SingleCluster-lsf-cn-5-LSFComputeNodeInstanceProfile-Eg1vl4IUaOnt|' -e 's|%CFN_LSF_CLUSTER_NAME%|LSFCluster|' -e 's|%CFN_FSXN_SVM_DNS_NAME%|fs-04ffafba4db988c1b.efs.cn-northwest-1.amazonaws.com.cn|' -e 's|%CFN_NFS_MOUNT_POINT%|/efs|' -e 's|%CFN_LSF_INSTALL_DIR%|/efs/tools/ibm/lsf/LSFCluster|' -e 's|%CFN_DCV_USER_NAME%|simuser|' -e 's|%CFN_LSF_COMPUTE_NODE_SPOT_FLEET_ROLE_ARN%|arn:aws-cn:iam::871772259371:role/EDA-SingleCluster-lsf-cn-5-LSFSpotFleetRole-566ZKLN9XIH|' /efs/tools/ibm/lsf/LSFCluster/conf/resource_connector/aws/conf/awsprov_templates.json
++ wget https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/user_data.sh -O /efs/tools/ibm/lsf/LSFCluster/10.1/resource_connector/aws/scripts/user_data.sh
+--2023-04-23 15:30:17--  https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/user_data.sh
+Resolving s3.amazonaws.com (s3.amazonaws.com)... 52.216.41.232, 52.216.97.101, 52.216.54.152, ...
+Connecting to s3.amazonaws.com (s3.amazonaws.com)|52.216.41.232|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2734 (2.7K) [application/x-sh]
+Saving to: ‘/efs/tools/ibm/lsf/LSFCluster/10.1/resource_connector/aws/scripts/user_data.sh’
+
+     0K ..                                                    100%  247M=0s
+
+2023-04-23 15:30:18 (247 MB/s) - ‘/efs/tools/ibm/lsf/LSFCluster/10.1/resource_connector/aws/scripts/user_data.sh’ saved [2734/2734]
+
++ chmod +x /efs/tools/ibm/lsf/LSFCluster/10.1/resource_connector/aws/scripts/user_data.sh
++ wget https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/lsf.shared -O /efs/tools/ibm/lsf/LSFCluster/conf/lsf.shared
+--2023-04-23 15:30:18--  https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/lsf.shared
+Resolving s3.amazonaws.com (s3.amazonaws.com)... 52.216.53.168, 52.217.235.176, 54.231.167.88, ...
+Connecting to s3.amazonaws.com (s3.amazonaws.com)|52.216.53.168|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1167 (1.1K) [application/octet-stream]
+Saving to: ‘/efs/tools/ibm/lsf/LSFCluster/conf/lsf.shared’
+
+     0K .                                                     100%  130M=0s
+
+2023-04-23 15:30:19 (130 MB/s) - ‘/efs/tools/ibm/lsf/LSFCluster/conf/lsf.shared’ saved [1167/1167]
+
++ sed -i -e 's/^_CFN_LSF_CLUSTER_NAME_/LSFCluster/' /efs/tools/ibm/lsf/LSFCluster/conf/lsf.shared
++ wget https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/lsb.queues -O /efs/tools/ibm/lsf/LSFCluster/conf/lsbatch/LSFCluster/configdir/lsb.queues
+--2023-04-23 15:30:19--  https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/lsb.queues
+Resolving s3.amazonaws.com (s3.amazonaws.com)... 52.217.171.136, 52.217.126.16, 52.216.111.69, ...
+Connecting to s3.amazonaws.com (s3.amazonaws.com)|52.217.171.136|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 574 [application/octet-stream]
+Saving to: ‘/efs/tools/ibm/lsf/LSFCluster/conf/lsbatch/LSFCluster/configdir/lsb.queues’
+
+     0K                                                       100% 71.1M=0s
+
+2023-04-23 15:30:21 (71.1 MB/s) - ‘/efs/tools/ibm/lsf/LSFCluster/conf/lsbatch/LSFCluster/configdir/lsb.queues’ saved [574/574]
+
++ wget https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/lsb.modules -O /efs/tools/ibm/lsf/LSFCluster/conf/lsbatch/LSFCluster/configdir/lsb.modules
+--2023-04-23 15:30:21--  https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/lsb.modules
+Resolving s3.amazonaws.com (s3.amazonaws.com)... 52.216.53.168, 52.217.171.136, 52.217.126.16, ...
+Connecting to s3.amazonaws.com (s3.amazonaws.com)|52.216.53.168|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 648 [application/octet-stream]
+Saving to: ‘/efs/tools/ibm/lsf/LSFCluster/conf/lsbatch/LSFCluster/configdir/lsb.modules’
+
+     0K                                                       100% 81.7M=0s
+
+2023-04-23 15:30:22 (81.7 MB/s) - ‘/efs/tools/ibm/lsf/LSFCluster/conf/lsbatch/LSFCluster/configdir/lsb.modules’ saved [648/648]
+
++ wget https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/lsb.params -O /efs/tools/ibm/lsf/LSFCluster/conf/lsbatch/LSFCluster/configdir/lsb.params
+--2023-04-23 15:30:22--  https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/lsb.params
+Resolving s3.amazonaws.com (s3.amazonaws.com)... 52.217.235.176, 52.216.53.168, 52.217.171.136, ...
+Connecting to s3.amazonaws.com (s3.amazonaws.com)|52.217.235.176|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1488 (1.5K) [application/octet-stream]
+Saving to: ‘/efs/tools/ibm/lsf/LSFCluster/conf/lsbatch/LSFCluster/configdir/lsb.params’
+
+     0K .                                                     100%  154M=0s
+
+2023-04-23 15:30:23 (154 MB/s) - ‘/efs/tools/ibm/lsf/LSFCluster/conf/lsbatch/LSFCluster/configdir/lsb.params’ saved [1488/1488]
+
++ sed -i -e 's/#\sLSF_HOST_ADDR_RANGE/LSF_HOST_ADDR_RANGE/' -e 's/#\sFLOAT_CLIENTS/FLOAT_CLIENTS/' /efs/tools/ibm/lsf/LSFCluster/conf/lsf.cluster.LSFCluster
++ cat
++ chown lsfadmin /efs/tools/ibm/lsf/LSFCluster/conf/mosquitto.conf
++ sed -i -e 's|^LSF_LOGDIR.*|LSF_LOGDIR=/var/log/lsf|' /efs/tools/ibm/lsf/LSFCluster/conf/lsf.conf
++ cat
++ /efs/tools/ibm/lsf/LSFCluster/10.1/install/hostsetup --top=/efs/tools/ibm/lsf/LSFCluster --boot=y --profile=y --start=y
+Logging installation sequence in /var/log/lsf/Install.log
+
+------------------------------------------------------------
+    L S F    H O S T S E T U P    U T I L I T Y
+------------------------------------------------------------
+This script sets up local host (LSF server, client or dynamic host) environment.
+
+Setting up LSF server host "ip-172-30-23-255" ...
+Checking LSF installation for host "ip-172-30-23-255.cn-northwest-1.compute.internal" ... Done
+Created symlink /etc/systemd/system/multi-user.target.wants/lsfd.service → /usr/lib/systemd/system/lsfd.service.
+Installing LSF service scripts on host "ip-172-30-23-255.cn-northwest-1.compute.internal" ... Done
+LSF service ports are defined in /efs/tools/ibm/lsf/LSFCluster/conf/lsf.conf.
+Checking LSF service ports definition on host "ip-172-30-23-255.cn-northwest-1.compute.internal" ... Done
+You are installing IBM Spectrum LSF -  Standard Edition.
+
+... Setting up LSF server host "ip-172-30-23-255" is done
+Adding LSF profile to host "ip-172-30-23-255.cn-northwest-1.compute.internal" ...
+... Adding LSF profile to host "ip-172-30-23-255" is done
+Starting up LSF daemons on host "ip-172-30-23-255.cn-northwest-1.compute.internal" ...
+... Starting up LSF server host "ip-172-30-23-255" is done
+... LSF host setup is done.
++ sleep 5
++ lsid
+IBM Spectrum LSF Standard 10.1.0.13, Apr 15 2022
+Copyright International Business Machines Corp. 1992, 2016.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+My cluster name is LSFCluster
+My master name is ip-172-30-23-255
++ /opt/aws/bin/cfn-signal -e 0 --stack EDA-SingleCluster-lsf-cn-5 --resource LSFMasterInstance --region cn-northwest-1
++ echo '*** END LSF MASTER BOOTSTRAP ***'
+*** END LSF MASTER BOOTSTRAP ***
