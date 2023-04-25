@@ -190,6 +190,11 @@ Resources:
               yum install libnsl* -y
               yum install libxcrypt-compat -y
 
+              # Install SSM so we can use SSM Session Manager and avoid ssh logins.
+              yum install -q -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
+              systemctl enable amazon-ssm-agent
+              systemctl start amazon-ssm-agent
+
               # Set DCV username and password
               export SM_PASSWORD=`/usr/local/bin/aws secretsmanager get-secret-value \
                                     --region ${AWS::Region} \
