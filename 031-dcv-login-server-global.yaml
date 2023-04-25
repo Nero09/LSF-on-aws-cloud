@@ -63,7 +63,7 @@ Mappings:
       FPGADev: ami-051c91d3186bfdb7d
       ALinux2: ami-0d7ed3ddb85b521a6
     cn-northwest-1:  
-      FPGADev: ami-0fe2d01469fad6578
+      FPGADev: ami-0dc06b9c8f83d2aef
       #ALinux2: ami-068dbba1f5ab1bc53 #ALinux2022
       ALinux2: ami-01d038c6487288308 #ALinux2023
 
