@@ -95,23 +95,27 @@ Parameters:
       The S3 URI to the LSF installation script package. 
       Select object in the console and choose Copy Path and paste here.
     Type: "String"
-    Default: "s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf10.1_lsfinstall_linux_x86_64.tar.Z"
+    #Default: "s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf10.1_lsfinstall_linux_x86_64.tar.Z"
+    Default: "s3://lsfcluster-cn/spectrum-lsf/lsf10.1_lsfinstall_linux_x86_64.tar.Z"
   CustomerLSFBinsUri:
     Description: The S3 URI to the LSF 10.1 Linux base distribution package. 
       Select object in the console and choose Copy Path and paste here.
     Type: "String"
-    Default: "s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64.tar.Z"
+    #Default: "s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64.tar.Z"
+    Default: "s3://lsfcluster-cn/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64.tar.Z"
   CustomerLSFFixPackUri:
     Description: >
       The S3 URI to the LSF 10.1 Fix Pack package. This must the lastest cumulative Fix Pack package.
       Select package object in the console and choose Copy Path and paste here.
     Type: "String"
-    Default: "s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z"
+    #Default: "s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z"
+    Default: "s3://lsfcluster-cn/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z"
   CustomerLSFEntitlementUri:
     Description: The S3 URI to the LSF entitlement file, lsf_std_entitlement.dat or lsf_adv_entitlement.dat.
       Select object in the S3 console and choose Copy Path and paste here.
     Type: String
-    Default: s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf_std_entitlement.dat
+    #Default: s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf_std_entitlement.dat
+    Default: s3://lsfcluster-cn/spectrum-lsf/lsf_std_entitlement.dat
   DCVUserName:
     Type: String
     Default: simuser
