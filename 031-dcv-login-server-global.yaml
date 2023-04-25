@@ -64,7 +64,7 @@ Mappings:
       ALinux2: ami-0d7ed3ddb85b521a6
     cn-northwest-1:  
       FPGADev: ami-0dc06b9c8f83d2aef
-      #ALinux2: ami-068dbba1f5ab1bc53 #ALinux2022
+      #ALinux2: ami-05e32acd909ec5552 #ALinux2022
       ALinux2: ami-01d038c6487288308 #ALinux2023
 
 Parameters:
@@ -135,7 +135,7 @@ Resources:
     DependsOn: LoginServerInstance
     Properties:
       Handle: !Ref 'InstanceWaitHandle'
-      Timeout: '3600'
+      Timeout: '300'
     Type: AWS::CloudFormation::WaitCondition
 
   DCVCredentialsSecret:
