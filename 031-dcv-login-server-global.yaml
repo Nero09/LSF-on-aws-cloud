@@ -64,8 +64,12 @@ Mappings:
       ALinux2: ami-0d7ed3ddb85b521a6
     cn-northwest-1:  
       FPGADev: ami-0dc06b9c8f83d2aef
-      #ALinux2: ami-05e32acd909ec5552 #ALinux2022
-      ALinux2: ami-01d038c6487288308 #ALinux2023
+      CentOS75: ami-01d038c6487288308 #ALinux2023
+      ALinux2: ami-05e32acd909ec5552 #ALinux2022
+    cn-north-1:  
+      FPGADev: ami-09bd2e7dec74a1ba8
+      CentOS75: ami-091ac79157bbe1353 #ALinux2023
+      ALinux2: ami-01ff067f1ba5d619c #ALinux2022
 
 Parameters:
   AdminKeyPair:
