@@ -61,7 +61,7 @@ Resources:
         SubnetId:
           Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"PrivateSubnet" ] ]
         SecurityGroupIds:
-        - Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"FSxOntapSG" ] ]
+          Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"FSxOntapSG" ] ]
 
   MountTargetSG:
     Type: AWS::EC2::SecurityGroup
