@@ -68,14 +68,14 @@ Resources:
     Properties:
       GroupDescription: "SG for EFS mount target"
 
-  MountTargetSGRule01:
-    Type: AWS::EC2::SecurityGroupIngress
-    DependsOn: "MountTargetSG"
-    Properties:
-      GroupName: !Ref MountTargetSG
-      Description: "SSH from VPN-SEA"
-      IpProtocol: "tcp"
-      SourceSecurityGroupName: !Ref UGEComputeNodeSG
+  # MountTargetSGRule01:
+  #   Type: AWS::EC2::SecurityGroupIngress
+  #   DependsOn: "MountTargetSG"
+  #   Properties:
+  #     GroupName: !Ref MountTargetSG
+  #     Description: "SSH from VPN-SEA"
+  #     IpProtocol: "tcp"
+  #     SourceSecurityGroupName: !Ref UGEComputeNodeSG
 
 Outputs:
   MountTargetID:
