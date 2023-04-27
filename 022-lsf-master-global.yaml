@@ -46,8 +46,13 @@ Mappings:
       ALinux2: ami-0d7ed3ddb85b521a6
     cn-northwest-1:  
       FPGADev: ami-0dc06b9c8f83d2aef
-      #ALinux2: ami-05e32acd909ec5552 #ALinux2022
+      CentOS75: ami-05e32acd909ec5552 #ALinux2022
       ALinux2: ami-01d038c6487288308 #ALinux2023
+    cn-north-1:  
+      FPGADev: ami-09bd2e7dec74a1ba8
+      CentOS75: ami-01ff067f1ba5d619c #ALinux2022
+      ALinux2: ami-091ac79157bbe1353 #ALinux2023
+
 
 Parameters:
   AdminKeyPair:
@@ -66,6 +71,7 @@ Parameters:
     Default: "ALinux2"
     AllowedValues:
       - ALinux2
+      - CentOS75
   ComputeAMI:
     Description: AMI (OS image) for the compute nodes.  
       NOTE - You must first subscribe to this AMI in the AWS Marketplace at https://aws.amazon.com/marketplace/pp/B00O7WM7QW"
@@ -178,13 +184,14 @@ Resources:
               # Install LSF installer prereqs, libnsl for lsid, libxcrypt-compt for bhosts
               yum install ed -q -y
               #for alinux2022
-              # yum install java-1.8.0-openjdk -q -y
-              # yum install pip
-              # pip install --upgrade --user awscli
+              yum install java-1.8.0-openjdk -q -y
+              yum install pip
+              pip install --upgrade --user awscli
               #for alinux2023
-              yum install java-1.8.0-amazon-corretto-devel -q -y
-              yum install libnsl* -y #for alinux2023
-              yum install libxcrypt-compat -y #for alinux2023
+              # yum install java-1.8.0-amazon-corretto-devel -q -y
+              # yum install libnsl* -y #for alinux2023
+              # yum install libxcrypt-compat -y #for alinux2023
+              
               yum install wget -q -y
               yum install vim -q -y
 
