@@ -184,13 +184,13 @@ Resources:
               # Install LSF installer prereqs, libnsl for lsid, libxcrypt-compt for bhosts
               yum install ed -q -y
               #for alinux2022
-              yum install java-1.8.0-openjdk -q -y
-              yum install pip
-              pip install --upgrade --user awscli
+              # yum install java-1.8.0-openjdk -q -y
+              # yum install pip
+              # pip install --upgrade --user awscli
               #for alinux2023
-              # yum install java-1.8.0-amazon-corretto-devel -q -y
-              # yum install libnsl* -y #for alinux2023
-              # yum install libxcrypt-compat -y #for alinux2023
+              yum install java-1.8.0-amazon-corretto-devel -q -y
+              yum install libnsl* -y #for alinux2023
+              yum install libxcrypt-compat -y #for alinux2023
               
               yum install wget -q -y
               yum install vim -q -y
