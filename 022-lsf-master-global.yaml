@@ -48,6 +48,10 @@ Mappings:
       FPGADev: ami-0dc06b9c8f83d2aef
       #ALinux2: ami-05e32acd909ec5552 #ALinux2022
       ALinux2: ami-01d038c6487288308 #ALinux2023
+    cn-north-1:          # Beijing
+      CentOS75: ami-0505d4fc4a60e9914
+      FPGADev: ami-0756e97f0b7fc27b2
+      ALinux2: ami-0cc197a96f4583f55
 
 Parameters:
   AdminKeyPair:
@@ -221,10 +225,10 @@ Resources:
 
               # Download customer-provided LSF binaries and entitlement file
               #aws --quiet s3 cp ${CustomerLSFInstallUri} /tmp
-              aws s3 cp ${CustomerLSFInstallUri} /tmp
-              aws --quiet s3 cp ${CustomerLSFBinsUri} /tmp
-              aws --quiet s3 cp ${CustomerLSFEntitlementUri} /tmp
-              aws --quiet s3 cp ${CustomerLSFFixPackUri} /tmp
+              aws s3 cp --region ${AWS::Region} ${CustomerLSFInstallUri} /tmp
+              aws s3 cp --region ${AWS::Region} ${CustomerLSFBinsUri} /tmp
+              aws s3 cp --region ${AWS::Region} ${CustomerLSFEntitlementUri} /tmp
+              aws s3 cp --region ${AWS::Region} ${CustomerLSFFixPackUri} /tmp
 
               
               cd /tmp
