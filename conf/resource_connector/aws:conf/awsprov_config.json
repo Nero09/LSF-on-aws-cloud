@@ -1,0 +1,5 @@
+{
+    "LogLevel": "DEBUG",
+    "AWS_REGION": "cn-north-1",
+    "AWS_SPOT_TERMINATE_ON_RECLAIM": "true"
+}
