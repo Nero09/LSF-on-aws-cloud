@@ -190,9 +190,9 @@ Resources:
               # Update AWS CLI
               yum install python3-pip -y
               yum install python-is-python3
-              pip3 -q install awscli
-              yum install libnsl* -y
-              yum install libxcrypt-compat -y
+              pip3 -q install -i https://opentuna.cn/pypi/web/simple awscli
+              # yum install libnsl* -y
+              # yum install libxcrypt-compat -y
 
               # Install SSM so we can use SSM Session Manager and avoid ssh logins.
               yum install -q -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
