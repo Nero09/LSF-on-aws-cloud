@@ -93,7 +93,7 @@ Parameters:
   LoginServerAMI:
     Description: "This should be the same AMI that is used for the compute nodes."
     Type: "String"
-    Default: ALinux2
+    Default: FPGADev
     AllowedValues:
       - ALinux2
       - CentOS75
