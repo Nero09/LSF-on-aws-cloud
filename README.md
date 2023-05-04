@@ -1,7 +1,7 @@
 # LSF-on-aws-cloud
 lsf deployment on AWS
 
-## architecture
+## Architecture
 
 <img width="784" alt="Screenshot 2023-04-27 at 12 35 08" src="https://user-images.githubusercontent.com/40814113/234760295-a3871584-af5c-48fc-bd26-657e9b146d0b.png">
 
@@ -40,4 +40,4 @@ lsf deployment on AWS
 
 5. Run 031-dcv-login-server-global.yaml via cloudformation
 
-in the Stack Failure Options, we recommend choosing **Preserve successfully provisioned resources**. This preserves the resources of the CloudFormation Stack instead of cleaning up stack on deployment failure, thereby facilitating debug. 
+In the Stack Failure Options, we recommend choosing **Preserve successfully provisioned resources**. This preserves the resources of the CloudFormation Stack instead of cleaning up stack on deployment failure, thereby facilitating debug. 
