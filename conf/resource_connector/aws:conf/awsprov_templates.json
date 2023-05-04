@@ -1,0 +1,171 @@
+{
+    "templates": [
+        {
+            "templateId": "m5-xlarge",
+            "priority": 7,
+            "maxNumber": 1000,
+            "attributes": {
+                "type":    ["String", "X86_64"],
+                "ncores":  ["Numeric", "2"],
+                "ncpus":   ["Numeric", "2"],
+                "mem":     ["Numeric", "15000"],
+                "instance_type":    ["String", "m5_xlarge"],
+                "aws":     ["Boolean", "1"]
+            },
+            "imageId": "ami-09bd2e7dec74a1ba8",
+            "subnetId": "subnet-0fb125e0c24f39416",
+            "vmType": "m5.xlarge",
+            "keyName": "easyaccess-bj",
+            "securityGroupIds": ["sg-093e782c1888e0e3d"],
+            "placementGroupName": "",
+            "tenancy": "default",
+            "instanceProfile":  "arn:aws-cn:iam::871772259371:instance-profile/eda-lsf-bj-5-LSFComputeNodeInstanceProfile-cp64YaAuZOnv",
+            "instanceTags":     "Name=LSF Exec Host;Cluster=LSFCluster",
+            "userData":         "FSXN_SVM_DNS_NAME=fs-0e828eaa7d5b2e5f7.efs.cn-north-1.amazonaws.com.cn;NFS_MOUNT_POINT=/efs;LSF_INSTALL_DIR=/efs/tools/ibm/lsf/LSFCluster;DCV_USER_NAME=simuser;instance_type=m5_xlarge"
+        },
+        {
+            "templateId": "m5-2xlarge",
+            "priority": 6,
+            "maxNumber": 1000,
+            "attributes": {
+                "type":    ["String", "X86_64"],
+                "ncores":  ["Numeric", "4"],
+                "ncpus":   ["Numeric", "4"],
+                "mem":     ["Numeric", "31000"],
+                "instance_type":    ["String", "m5_2xlarge"],
+                "aws":     ["Boolean", "1"]
+            },
+            "imageId": "ami-09bd2e7dec74a1ba8",
+            "subnetId": "subnet-0fb125e0c24f39416",
+            "vmType": "m5.2xlarge",
+            "keyName": "easyaccess-bj",
+            "securityGroupIds": ["sg-093e782c1888e0e3d"],
+            "placementGroupName": "",
+            "tenancy": "default",
+            "instanceProfile":  "arn:aws-cn:iam::871772259371:instance-profile/eda-lsf-bj-5-LSFComputeNodeInstanceProfile-cp64YaAuZOnv",
+            "instanceTags":     "Name=LSF Exec Host;Cluster=LSFCluster",
+            "userData":         "FSXN_SVM_DNS_NAME=fs-0e828eaa7d5b2e5f7.efs.cn-north-1.amazonaws.com.cn;NFS_MOUNT_POINT=/efs;LSF_INSTALL_DIR=/efs/tools/ibm/lsf/LSFCluster;DCV_USER_NAME=simuser;instance_type=m5_2xlarge"
+        },
+        {
+            "templateId": "c5-2xlarge",
+            "priority": 10,
+            "maxNumber": 1000,
+            "attributes": {
+                "type":    ["String", "X86_64"],
+                "ncores":  ["Numeric", "4"],
+                "ncpus":   ["Numeric", "4"],
+                "mem":     ["Numeric", "15000"],
+                "instance_type":    ["String", "c5_2xlarge"],
+                "aws":     ["Boolean", "1"]
+            },
+            "imageId": "ami-09bd2e7dec74a1ba8",
+            "subnetId": "subnet-0fb125e0c24f39416",
+            "vmType": "c5.2xlarge",
+            "keyName": "easyaccess-bj",
+            "securityGroupIds": ["sg-093e782c1888e0e3d"],
+            "placementGroupName": "",
+            "tenancy": "default",
+            "instanceProfile":  "arn:aws-cn:iam::871772259371:instance-profile/eda-lsf-bj-5-LSFComputeNodeInstanceProfile-cp64YaAuZOnv",
+            "instanceTags":     "Name=LSF Exec Host;Cluster=LSFCluster",
+            "userData":         "FSXN_SVM_DNS_NAME=fs-0e828eaa7d5b2e5f7.efs.cn-north-1.amazonaws.com.cn;NFS_MOUNT_POINT=/efs;LSF_INSTALL_DIR=/efs/tools/ibm/lsf/LSFCluster;DCV_USER_NAME=simuser;instance_type=c5_2xlarge"
+        },
+        {
+            "templateId": "z1d-2xlarge",
+            "priority": 8,
+            "maxNumber": 1000,
+            "attributes": {
+                "type":    ["String", "X86_64"],
+                "ncores":  ["Numeric", "4"],
+                "ncpus":   ["Numeric", "4"],
+                "mem":     ["Numeric", "62000"],
+                "instance_type":    ["String", "z1d_2xlarge"],
+                "ssd":     ["Boolean", "1"],
+                "aws":     ["Boolean", "1"]
+            },
+            "imageId": "ami-09bd2e7dec74a1ba8",
+            "subnetId": "subnet-0fb125e0c24f39416",
+            "vmType": "z1d.2xlarge",
+            "keyName": "easyaccess-bj",
+            "securityGroupIds": ["sg-093e782c1888e0e3d"],
+            "placementGroupName": "",
+            "tenancy": "default",
+            "instanceProfile":  "arn:aws-cn:iam::871772259371:instance-profile/eda-lsf-bj-5-LSFComputeNodeInstanceProfile-cp64YaAuZOnv",
+            "instanceTags":     "Name=LSF Exec Host;Cluster=LSFCluster",
+            "userData":         "FSXN_SVM_DNS_NAME=fs-0e828eaa7d5b2e5f7.efs.cn-north-1.amazonaws.com.cn;NFS_MOUNT_POINT=/efs;LSF_INSTALL_DIR=/efs/tools/ibm/lsf/LSFCluster;DCV_USER_NAME=simuser;ssd=ssd;instance_type=z1d_2xlarge"
+        },
+        {
+            "templateId": "r5-12xlarge",
+            "priority": 5,
+            "maxNumber": 1000,
+            "attributes": {
+                "type":    ["String", "X86_64"],
+                "ncores":  ["Numeric", "24"],
+                "ncpus":   ["Numeric", "24"],
+                "mem":     ["Numeric", "380000"],
+                "instance_type":    ["String", "r5_12xlarge"],
+                "aws":     ["Boolean", "1"]
+            },
+            "imageId": "ami-09bd2e7dec74a1ba8",
+            "subnetId": "subnet-0fb125e0c24f39416",
+            "vmType": "r5.12xlarge",
+            "keyName": "easyaccess-bj",
+            "securityGroupIds": ["sg-093e782c1888e0e3d"],
+            "placementGroupName": "",
+            "tenancy": "default",
+            "instanceProfile":  "arn:aws-cn:iam::871772259371:instance-profile/eda-lsf-bj-5-LSFComputeNodeInstanceProfile-cp64YaAuZOnv",
+            "instanceTags":     "Name=LSF Exec Host;Cluster=LSFCluster",
+            "userData":         "FSXN_SVM_DNS_NAME=fs-0e828eaa7d5b2e5f7.efs.cn-north-1.amazonaws.com.cn;NFS_MOUNT_POINT=/efs;LSF_INSTALL_DIR=/efs/tools/ibm/lsf/LSFCluster;DCV_USER_NAME=simuser;instance_type=r5_12xlarge"
+        },
+        {
+            "templateId": "r5-24xlarge",
+            "priority": 4,
+            "maxNumber": 1000,
+            "attributes": {
+                "type":    ["String", "X86_64"],
+                "ncores":  ["Numeric", "48"],
+                "ncpus":   ["Numeric", "48"],
+                "mem":     ["Numeric", "770000"],
+                "instance_type":    ["String", "r5_24xlarge"],
+                "aws":     ["Boolean", "1"]
+            },
+            "imageId": "ami-09bd2e7dec74a1ba8",
+            "subnetId": "subnet-0fb125e0c24f39416",
+            "vmType": "r5.24xlarge",
+            "keyName": "easyaccess-bj",
+            "securityGroupIds": ["sg-093e782c1888e0e3d"],
+            "placementGroupName": "",
+            "tenancy": "default",
+            "instanceProfile":  "arn:aws-cn:iam::871772259371:instance-profile/eda-lsf-bj-5-LSFComputeNodeInstanceProfile-cp64YaAuZOnv",
+            "instanceTags":     "Name=LSF Exec Host;Cluster=LSFCluster",
+            "userData":         "FSXN_SVM_DNS_NAME=fs-0e828eaa7d5b2e5f7.efs.cn-north-1.amazonaws.com.cn;NFS_MOUNT_POINT=/efs;LSF_INSTALL_DIR=/efs/tools/ibm/lsf/LSFCluster;DCV_USER_NAME=simuser;instance_type=r5_24xlarge"
+        },
+        {
+            "templateId": "spot-fleet-c5-2xl",
+            "priority": 4,
+            "maxNumber": 1000,
+            "attributes": {
+                "type":    ["String", "X86_64"],
+                "ncores":  ["Numeric", "4"],
+                "ncpus":   ["Numeric", "4"],
+                "mem":     ["Numeric", "15000"],
+                "instance_type":    ["String", "spot"],
+                "!spot":   ["Boolean", "1"],
+                "aws":     ["Boolean", "1"]
+            },
+            "imageId": "ami-09bd2e7dec74a1ba8",
+            "subnetId": "subnet-0fb125e0c24f39416",
+            "vmType": "c5.2xlarge,c5.4xlarge,c5.9xlarge,m5.2xlarge,m5.4xlarge,m5.8xlarge",
+            "spotPrice":         "0.9",
+            "allocationStrategy":"lowestPrice",
+            "fleetRole":         "arn:aws-cn:iam::871772259371:role/eda-lsf-bj-5-LSFSpotFleetRole-1HZUDAOK70OT7",
+            "keyName":           "easyaccess-bj",
+            "securityGroupIds": ["sg-093e782c1888e0e3d"],
+            "placementGroupName": "",
+            "tenancy":          "default",
+            "instanceProfile":  "arn:aws-cn:iam::871772259371:instance-profile/eda-lsf-bj-5-LSFComputeNodeInstanceProfile-cp64YaAuZOnv",
+            "instanceTags":     "Name=LSF Exec Host;Cluster=LSFCluster",
+            "userData":         "FSXN_SVM_DNS_NAME=fs-0e828eaa7d5b2e5f7.efs.cn-north-1.amazonaws.com.cn;NFS_MOUNT_POINT=/efs;LSF_INSTALL_DIR=/efs/tools/ibm/lsf/LSFCluster;DCV_USER_NAME=simuser;spot=!spot"
+        }
+        
+    ]
+}
