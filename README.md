@@ -35,7 +35,7 @@ lsf deployment on AWS
   to  
   `mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport $FSXN_SVM_DNS_NAME:/ $NFS_MOUNT_POINT`
 
-4. At EC2 console, change LSFMasterEC2 iam role to a role with administator access (just for test, I will modify this item with a manual created iam role later)
+4. At EC2 console, change LSFMasterEC2 iam role to a role with administator access  
 
 5. Run 031-dcv-login-server-global.yaml via cloudformation
 
