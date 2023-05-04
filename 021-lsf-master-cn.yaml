@@ -44,15 +44,14 @@ Mappings:
       CentOS75: ami-045f38c93733dd48d
       FPGADev: ami-051c91d3186bfdb7d
       ALinux2: ami-0d7ed3ddb85b521a6
-    cn-northwest-1:      # Ningxia
-      CentOS75: ami-9887c6e7
-      FPGADev: ami-0cf12acd587e51b42
-      ALinux2: ami-01d038c6487288308
-    cn-north-1:          # Beijing
-      CentOS75: ami-0505d4fc4a60e9914
-      FPGADev: ami-0756e97f0b7fc27b2
-      ALinux2: ami-0cc197a96f4583f55
-
+    cn-northwest-1:  
+      FPGADev: ami-0dc06b9c8f83d2aef
+      CentOS75: ami-01d038c6487288308 #ALinux2023
+      ALinux2: ami-05e32acd909ec5552 #ALinux2022
+    cn-north-1:  
+      FPGADev: ami-09bd2e7dec74a1ba8
+      CentOS75: ami-091ac79157bbe1353 #ALinux2023
+      ALinux2: ami-01ff067f1ba5d619c #ALinux2022
 
 Parameters:
   AdminKeyPair:
@@ -71,13 +70,13 @@ Parameters:
     Default: "ALinux2"
     AllowedValues:
       - ALinux2
+      - CentOS75
   ComputeAMI:
     Description: AMI (OS image) for the compute nodes.  
       NOTE - You must first subscribe to this AMI in the AWS Marketplace at https://aws.amazon.com/marketplace/pp/B00O7WM7QW"
     Type: "String"
-    Default: "ALinux2"
+    Default: "FPGADev"
     AllowedValues:
-      - CentOS75
       - FPGADev
       - ALinux2
   LSFClusterName:
@@ -92,27 +91,35 @@ Parameters:
     Description: Directory where the FSxN file system will be mounted.
     Type: "String"
     Default: "/efs"
+  EFSDns:
+    Description: DNS of filesystem
+    Type: "String"
+    Default: "pls comment"
   CustomerLSFInstallUri:
     Description: >
       The S3 URI to the LSF installation script package. 
       Select object in the console and choose Copy Path and paste here.
     Type: "String"
+    #Default: "s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf10.1_lsfinstall_linux_x86_64.tar.Z"
     Default: "s3://lsfcluster-cn/spectrum-lsf/lsf10.1_lsfinstall_linux_x86_64.tar.Z"
   CustomerLSFBinsUri:
     Description: The S3 URI to the LSF 10.1 Linux base distribution package. 
       Select object in the console and choose Copy Path and paste here.
     Type: "String"
+    #Default: "s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64.tar.Z"
     Default: "s3://lsfcluster-cn/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64.tar.Z"
   CustomerLSFFixPackUri:
     Description: >
       The S3 URI to the LSF 10.1 Fix Pack package. This must the lastest cumulative Fix Pack package.
       Select package object in the console and choose Copy Path and paste here.
     Type: "String"
+    #Default: "s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z"
     Default: "s3://lsfcluster-cn/spectrum-lsf/lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z"
   CustomerLSFEntitlementUri:
     Description: The S3 URI to the LSF entitlement file, lsf_std_entitlement.dat or lsf_adv_entitlement.dat.
       Select object in the S3 console and choose Copy Path and paste here.
     Type: String
+    #Default: s3://eda-hybrid-workshop-uswest1/spectrum-lsf/lsf_std_entitlement.dat
     Default: s3://lsfcluster-cn/spectrum-lsf/lsf_std_entitlement.dat
   DCVUserName:
     Type: String
@@ -132,9 +139,6 @@ Resources:
         - RegionMap
         - !Ref AWS::Region
         - !Ref MasterServerAMI
-      #SubnetId: "subnet-042e9a6fe5ac775ae"
-      #SecurityGroupIds: 
-      #  - "sg-0269b79b1458b8110"
       SubnetId:
           Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"PrivateSubnet" ] ]
       SecurityGroupIds:
@@ -176,11 +180,22 @@ Resources:
               # Install cfn-signal helper script to signal bootstrap completion to CloudFormation
               yum update -y aws-cfn-bootstrap
 
-              # Install LSF installer prereqs
+              # Install LSF installer prereqs, libnsl for lsid, libxcrypt-compt for bhosts
               yum install ed -q -y
+              #for alinux2022
               yum install java-1.8.0-openjdk -q -y
+              yum install pip
+              pip install --upgrade --user awscli
+              #for alinux2023
+              # yum install java-1.8.0-amazon-corretto-devel -q -y
+              # yum install libnsl* -y #for alinux2023
+              # yum install libxcrypt-compat -y #for alinux2023
+              
               yum install wget -q -y
               yum install vim -q -y
+              #for china region alinux2022
+              aws configure set region ${AWS::Region}
+
 
               # Install SSM so we can use SSM Session Manager and avoid ssh logins.
               yum install -q -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
@@ -193,11 +208,11 @@ Resources:
               
               #mount NFS file system
               #mount -t nfs -o "rsize=262144,wsize=262144,hard,vers=3,tcp,mountproto=tcp" ${FSxOntapFS}:/vol1 ${FileSystemMountPoint}
-              mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-08301ea47f456aeac.efs.cn-northwest-1.amazonaws.com.cn:/ ${FileSystemMountPoint}
+              mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${FSxOntapFS}:/ ${FileSystemMountPoint}
 
               #add to fstab
-              #echo "${FSxOntapFS}:/vol1 ${FileSystemMountPoint} nfs nfsvers=3,rsize=262144,wsize=262144,tcp,hard 0 0" >> \
-              #  /etc/fstab
+              echo "${FSxOntapFS}:/ ${FileSystemMountPoint} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev 0 0" >> \
+                /etc/fstab
 
               mkdir -p $LSF_INSTALL_DIR
               mkdir /var/log/lsf && chmod 777 /var/log/lsf
@@ -212,10 +227,11 @@ Resources:
               adduser -m -u 1500 $LSF_ADMIN
 
               # Download customer-provided LSF binaries and entitlement file
-              aws --quiet s3 cp --region ${AWS::Region} ${CustomerLSFInstallUri} /tmp
-              aws --quiet s3 cp --region ${AWS::Region} ${CustomerLSFBinsUri} /tmp
-              aws --quiet s3 cp --region ${AWS::Region} ${CustomerLSFEntitlementUri} /tmp
-              aws --quiet s3 cp --region ${AWS::Region} ${CustomerLSFFixPackUri} /tmp
+              #aws --quiet s3 cp ${CustomerLSFInstallUri} /tmp
+              aws s3 cp --region ${AWS::Region} ${CustomerLSFInstallUri} /tmp
+              aws s3 cp --region ${AWS::Region} ${CustomerLSFBinsUri} /tmp
+              aws s3 cp --region ${AWS::Region} ${CustomerLSFEntitlementUri} /tmp
+              aws s3 cp --region ${AWS::Region} ${CustomerLSFFixPackUri} /tmp
 
               
               cd /tmp
@@ -270,7 +286,7 @@ Resources:
                      -e "s|%CFN_COMPUTE_SECURITY_GROUP_ID%|${LSFComputeNodeSGGroupId}|" \
                      -e "s|%CFN_LSF_COMPUTE_NODE_INSTANCE_PROFILE_ARN%|${LSFComputeNodeInstanceProfileArn}|" \
                      -e "s|%CFN_LSF_CLUSTER_NAME%|${LSFClusterName}|" \
-                     -e "s|%CFN_FSXN_SVM_DNS_NAME%|fs-08301ea47f456aeac.efs.cn-northwest-1.amazonaws.com.cn|" \
+                     -e "s|%CFN_FSXN_SVM_DNS_NAME%|${FSxOntapFS}|" \
                      -e "s|%CFN_NFS_MOUNT_POINT%|${FileSystemMountPoint}|" \
                      -e "s|%CFN_LSF_INSTALL_DIR%|$LSF_INSTALL_DIR|" \
                      -e "s|%CFN_DCV_USER_NAME%|${DCVUserName}|" \
@@ -386,13 +402,11 @@ Resources:
             - LSFComputeNodeInstanceProfileArn: !GetAtt LSFComputeNodeInstanceProfile.Arn
               LSFComputeNodeSpotFleetRoleArn: !GetAtt LSFSpotFleetRole.Arn
               LSFComputeNodeAmi: !FindInMap [ RegionMap, !Ref "AWS::Region", !Ref ComputeAMI ]
-              #LSFComputeNodeSGGroupId: "sg-0a73ba4530cd30841"
-              #LSFComputeNodeSubnet: "subnet-042e9a6fe5ac775ae"
               LSFComputeNodeSGGroupId:
                 Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"LSFComputeNodeSG" ] ]
               LSFComputeNodeSubnet:
                 Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"PrivateSubnet" ] ]
-              FSxOntapFS: "fs-08301ea47f456aeac.efs.cn-northwest-1.amazonaws.com.cn"
+              FSxOntapFS: !Ref EFSDns
 
   LSFMasterRole:
       Type: "AWS::IAM::Role"
