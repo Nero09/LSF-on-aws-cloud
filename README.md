@@ -13,8 +13,7 @@ lsf deployment on AWS
 |Install script|Passport Advantage|--|`lsf10.1_lsfinstall_linux_x86_64.tar.Z` 
 |Base distribution|Passport Advantage|--|`lsf10.1_linux2.6-glibc2.3-x86_64.tar.Z`
 |Entitlement file|Passport Advantage|--|`lsf_std_entitlement.dat` or `lsf_adv_entitlement.dat`
-|Fix Pack 10|Fix Central|lsf-10.1.0.10-spk build545500|`lsf10.1_linux2.6-glibc2.3-x86_64-545500.tar.Z`|
-|Patch|Fix Central|LSF Resource Connector patch to address Log4J CVE-2021-44228 security vulnerability.|`lsf10.1_linux2.6-glibc2.3-x86_64-600877.tar.Z`|  
+|Fix Pack 10|Fix Central|--|`lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z`|
 
 3.An Amazon EC2 key pair  
 4.A free subscription to the AWS FPGA Developer AMI from AWS Marketplace
@@ -36,7 +35,7 @@ lsf deployment on AWS
   to  
   `mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport $FSXN_SVM_DNS_NAME:/ $NFS_MOUNT_POINT`
 
-4. At EC2 console, change LSFMasterEC2 iam role to a role with administator access (just for test, I will modify this item with a manual created iam role later)
+4. At EC2 console, change LSFMasterEC2 iam role to a role with administator access  
 
 5. Run 031-dcv-login-server-global.yaml via cloudformation
 
