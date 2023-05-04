@@ -420,12 +420,12 @@ Resources:
               Effect: Allow
               Principal:
                 Service:
-                - "ec2.amazonaws.com"
+                - "ec2.amazonaws.com.cn"
               Action:
               - "sts:AssumeRole"
         ManagedPolicyArns:
-          - "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
-          - "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+          - "arn:aws-cn:iam::aws:policy/CloudWatchLogsFullAccess"
+          - "arn:aws-cn:iam::aws:policy/AmazonSSMManagedInstanceCore"
         Policies:
           - PolicyName: LSFResourceConnectorPerms
             PolicyDocument:
@@ -465,7 +465,7 @@ Resources:
                   Condition:
                       StringEquals:
                         iam:PassedToService:
-                            "ec2.amazonaws.com"
+                            "ec2.amazonaws.com.cn"
                 - Effect: Allow
                   Action:
                     - s3:GetObject
@@ -483,11 +483,11 @@ Resources:
               Effect: Allow
               Principal:
                 Service:
-                - "spotfleet.amazonaws.com"
+                - "spotfleet.amazonaws.com.cn"
               Action:
               - "sts:AssumeRole"
         ManagedPolicyArns:
-          - "arn:aws:iam::aws:policy/service-role/AmazonEC2SpotFleetTaggingRole"
+          - "arn:aws-cn:iam::aws:policy/service-role/AmazonEC2SpotFleetTaggingRole"
 
   LSFComputeNodeRole:
       Type: "AWS::IAM::Role"
@@ -501,12 +501,12 @@ Resources:
               Effect: Allow
               Principal:
                 Service:
-                - "ec2.amazonaws.com"
+                - "ec2.amazonaws.com.cn"
               Action:
               - "sts:AssumeRole"
         ManagedPolicyArns:
-          - "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
-          - "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+          - "arn:aws-cn:iam::aws:policy/CloudWatchLogsFullAccess"
+          - "arn:aws-cn:iam::aws:policy/AmazonSSMManagedInstanceCore"
         Policies:
           - PolicyName: DownloadS3Packages
             PolicyDocument:
