@@ -91,10 +91,6 @@ Parameters:
     Description: Directory where the FSxN file system will be mounted.
     Type: "String"
     Default: "/efs"
-  EFSDns:
-    Description: DNS of filesystem
-    Type: "String"
-    Default: "pls comment"
   CustomerLSFInstallUri:
     Description: >
       The S3 URI to the LSF installation script package. 
@@ -406,7 +402,8 @@ Resources:
                 Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"LSFComputeNodeSG" ] ]
               LSFComputeNodeSubnet:
                 Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"PrivateSubnet" ] ]
-              FSxOntapFS: !Ref EFSDns
+              FSxOntapFS: 
+                Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"EFSDNS" ] ]
 
   LSFMasterRole:
       Type: "AWS::IAM::Role"
