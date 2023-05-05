@@ -139,7 +139,7 @@ Resources:
     DependsOn: LoginServerInstance
     Properties:
       Handle: !Ref 'InstanceWaitHandle'
-      Timeout: '600'
+      Timeout: '3600'
     Type: AWS::CloudFormation::WaitCondition
 
   DCVCredentialsSecret:
