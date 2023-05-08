@@ -21,14 +21,10 @@ lsf deployment on AWS
 ## Deployment:
 1. Run 01-network.yaml via cloudformation
 
-2. Create EFS in console, pay attention to 4 parts: 
-  * customize(自定义) when create;
-  * choose subnet(xxx-network-yourcluster);
-  * choose security group(yourcluster-private-subnet);
-  * remember DNS
+2. Run 012-efs.yaml to create EFS shared file storage.
 
 3. Run 022-lsf-master-global.yaml via cloudformation
-  LSF software path are the S3 buckets where you locate your LSF software & licence. EFSDns is DNS in step 2.  
+  LSF software path are the S3 buckets where you locate your LSF software & licence.  
   Then in file `$FileSystemMountPoint/$LSFInstallPath/$YourCluster/10.1/resource_connector/aws/scripts/user_data.sh`,  
   replace  
   `mount -t nfs -o rw,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 $FSXN_SVM_DNS_NAME:/vol1`  

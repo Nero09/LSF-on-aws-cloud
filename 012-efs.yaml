@@ -50,6 +50,9 @@ Resources:
     Properties:
       PerformanceMode: !Ref EFSPerformanceMode
       ThroughputMode: !Ref EFSThroughputMode
+      Encrypted: True
+      BackupPolicy: 
+        Status: ENABLED
       FileSystemTags:
         - Key: Name
           Value: !Ref 'AWS::StackName'
@@ -60,13 +63,13 @@ Resources:
         FileSystemId: !Ref LSFElasticFileSystem
         SubnetId:
           Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"PrivateSubnet" ] ]
-        SecurityGroupIds:
-          Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"FSxOntapSG" ] ]
+        SecurityGroups:
+          - Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"FSxOntapSG" ] ]
 
-  MountTargetSG:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: "SG for EFS mount target"
+  # MountTargetSG:
+  #   Type: AWS::EC2::SecurityGroup
+  #   Properties:
+  #     GroupDescription: "SG for EFS mount target"
 
   # MountTargetSGRule01:
   #   Type: AWS::EC2::SecurityGroupIngress
@@ -84,6 +87,16 @@ Outputs:
   FileSystemID:
     Description: "File system ID"
     Value: !Ref LSFElasticFileSystem
+  EfsDnsName:
+    Description: DNS Name of the LSF EFS file system
+    Value: 
+      !Join   
+        - '.'
+        - - !Ref LSFElasticFileSystem
+          - efs
+          - !Sub '${AWS::Region}.${AWS::URLSuffix}'
+    Export:
+      Name: !Join [ '-', [ !Ref LSFClusterName,"EFSDNS" ] ]
 
 
 
