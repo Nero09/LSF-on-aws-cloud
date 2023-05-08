@@ -25,11 +25,6 @@ lsf deployment on AWS
 
 3. Run 021-lsf-master-cn.yaml via cloudformation
   LSF software path are the S3 buckets where you locate your LSF software & licence.  
-  Then in file `$FileSystemMountPoint/$LSFInstallPath/$YourCluster/10.1/resource_connector/aws/scripts/user_data.sh`,  
-  replace  
-  `mount -t nfs -o rw,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 $FSXN_SVM_DNS_NAME:/vol1`  
-  to  
-  `mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport $FSXN_SVM_DNS_NAME:/ $NFS_MOUNT_POINT`
 
 4. At EC2 console, change LSFMasterEC2 iam role to a role with administator access  
 
