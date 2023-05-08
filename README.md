@@ -23,7 +23,7 @@ lsf deployment on AWS
 
 2. Run 012-efs.yaml to create EFS shared file storage.
 
-3. Run 022-lsf-master-global.yaml via cloudformation
+3. Run 021-lsf-master-cn.yaml via cloudformation
   LSF software path are the S3 buckets where you locate your LSF software & licence.  
   Then in file `$FileSystemMountPoint/$LSFInstallPath/$YourCluster/10.1/resource_connector/aws/scripts/user_data.sh`,  
   replace  
@@ -33,6 +33,6 @@ lsf deployment on AWS
 
 4. At EC2 console, change LSFMasterEC2 iam role to a role with administator access  
 
-5. Run 031-dcv-login-server-global.yaml via cloudformation
+5. Run 031-dcv-login-server-cn.yaml via cloudformation
 
 In the Stack Failure Options, we recommend choosing **Preserve successfully provisioned resources**. This preserves the resources of the CloudFormation Stack instead of cleaning up stack on deployment failure, thereby facilitating debug. 
