@@ -309,7 +309,7 @@ Resources:
                   rm /tmp/wait-handle-sent
                   exit 0
                 elif [[ \${!wait_handle_status} == "false" && \${!my_wait_handle} != "" ]] ; then
-                  echo "Sending success to wait handle"
+                  echo "Sending success to wait handle" > /tmp/send-success-to-wait-handle
                   curl -X PUT -H 'Content-Type:' --data-binary '{ "Status" : "SUCCESS",  "Reason" : "instance launched",  "UniqueId" : "inst001",  "Data" : "instance launched."}' "\${!my_wait_handle}"
                   echo "true" > /tmp/wait-handle-sent
                 fi
