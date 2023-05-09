@@ -296,6 +296,7 @@ Resources:
               # user_data script that RC executes on compute nodes
               wget https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/user_data.sh \
                 -O $LSF_INSTALL_DIR/10.1/resource_connector/aws/scripts/user_data.sh
+              sed -i 's%mount -t nfs -o rw,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 $FSXN_SVM_DNS_NAME:/vol1 $NFS_MOUNT_POINT%mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport $FSXN_SVM_DNS_NAME:/ $NFS_MOUNT_POINT%' $LSF_INSTALL_DIR/10.1/resource_connector/aws/scripts/user_data.sh
               chmod +x $LSF_INSTALL_DIR/10.1/resource_connector/aws/scripts/user_data.sh
 
               # Copy in pre-configured lsf config files

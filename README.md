@@ -16,23 +16,57 @@ lsf deployment on AWS
 |Fix Pack 10|Fix Central|--|`lsf10.1_linux2.6-glibc2.3-x86_64-601088.tar.Z`|
 
 3.An Amazon EC2 key pair  
-4.A free subscription to the AWS FPGA Developer AMI from AWS Marketplace
+4.A free subscription to the AWS FPGA Developer AMI from AWS Marketplace, detail process as below.  
+如果想使用 AWS vivado AMI, 需要在 AWSMarkerplace 订阅该 AMI。进入 https://awsmarketplace.amazonaws.cn/marketplace/search/results?x=0&y=0&searchTerms=Fpga 后，搜索 FPGA 
+![image](https://user-images.githubusercontent.com/40814113/236984177-65d7b513-1096-427a-ad00-e2a8e303244b.png)  
+选择 【FPGA Developer AMI】点击订阅  
+![image](https://user-images.githubusercontent.com/40814113/236984256-1520dc1b-e8cf-49ba-971b-3aeb7e1a5cc5.png)  
+验证已经成功订阅，进入marketplace  
+![image](https://user-images.githubusercontent.com/40814113/236984385-953c621e-ac12-497b-b1d4-1e0e5679536f.png)  
+在管理订阅栏目中看到已经成功订阅FPGA AMI  
+![image](https://user-images.githubusercontent.com/40814113/236984672-7e90478b-7f2d-40cd-b6aa-e4b8145579b5.png)
+
 
 ## Deployment:
 1. Run 01-network.yaml via cloudformation
 
 2. Run 012-efs.yaml to create EFS shared file storage.
 
-3. Run 022-lsf-master-global.yaml via cloudformation
+3. Run 021-lsf-master-cn.yaml via cloudformation
   LSF software path are the S3 buckets where you locate your LSF software & licence.  
-  Then in file `$FileSystemMountPoint/$LSFInstallPath/$YourCluster/10.1/resource_connector/aws/scripts/user_data.sh`,  
-  replace  
-  `mount -t nfs -o rw,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 $FSXN_SVM_DNS_NAME:/vol1`  
-  to  
-  `mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport $FSXN_SVM_DNS_NAME:/ $NFS_MOUNT_POINT`
 
 4. At EC2 console, change LSFMasterEC2 iam role to a role with administator access  
 
-5. Run 031-dcv-login-server-global.yaml via cloudformation
+5. Run 031-dcv-login-server-cn.yaml via cloudformation
 
 In the Stack Failure Options, we recommend choosing **Preserve successfully provisioned resources**. This preserves the resources of the CloudFormation Stack instead of cleaning up stack on deployment failure, thereby facilitating debug. 
+
+## Test:
+1. Log into the login server via SSH as `centos` user using the private key from the key pair you provided in the Cloudformation stack and the IP address found in **LoginServerPublicIp** under the stack031's **Outputs** tab.
+
+   `ssh -i /path/to/private_key centos@<host_ip>`
+
+   >NOTE: If you have trouble connecting, ensure the security group on the login server includes the IP address of your client.
+
+2. Run the `lsid` command to verify that LSF installed properly and is running. You should see something similar to the following:
+    ```
+    IBM Spectrum LSF Standard 10.1.0.11, Nov 12 2020
+    Copyright International Business Machines Corp. 1992, 2016.
+    US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+    My cluster name is <CLUSTER_NAME>
+    My master name is <MASTER_HOST_NAME>
+    ```
+3. Download and install the [NICE DCV remote desktop native client](https://download.nice-dcv.com) on your local laptop/desktop computer.  
+  a. Launch the DCV client application.  
+  b. Paste the public IP address of the **Login Server** into the field. Click "Trust & Connect" when prompted.  
+  c. Enter the Username and Password.  You can find these credentials in **AWS Secrets Manager** in the AWS Console: Go to the Secrets Manager service and select the ***/DCVCredentialsSecret** secret, then click on the **Retrieve secret value** button. Copy the **username** and **password** and paste them into the appropriate DCV client fields.
+
+4. In DCV linux console, **Submit the setup job into LSF**. The `--scratch-dir` should be the path to the scratch directory you defined when launching the CloudFormation stack in the previous tutorial.  The default is `/efs/scratch`.
+
+   `bsub -R aws -J "setup" sleep 5 --scratch-dir /efs/scratch`
+5. Watch job status. This job will generate demand to LSF Resource Connector for an EC2 instance.  Shortly after you submit the job, you should see a new "LSF Exec Host" instance in the EC2 Dashboard in the AWS console. It should take 2-5 minutes for this new instance to join the cluster and accept the job.  Use the `bjobs` command to watch the status of the job. 
+
+### Clean up
+
+To help prevent unwanted charges to your AWS account, you can delete the AWS resources that you used for this tutorial.
+You can delete stack as sequence 031->021->012->01
