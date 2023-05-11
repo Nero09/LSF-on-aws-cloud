@@ -57,7 +57,7 @@ Parameters:
   SshSource:
     Description: "CIDR range that can ssh into the infrastructure instances. Use your public IP address (http://checkip.amazonaws.com)."
     Type: String
-    Default: 0.0.0.0/32
+    Default: 0.0.0.0/0
     AllowedPattern: (\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})
     ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
 

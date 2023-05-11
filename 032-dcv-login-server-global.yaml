@@ -111,10 +111,10 @@ Parameters:
     Type: String
     Default: /efs
     AllowedPattern: ^/.+
-  EFSDns:
-    Description: DNS of filesystem
-    Type: "String"
-    Default: "pls comment"
+  # EFSDns:
+  #   Description: DNS of filesystem
+  #   Type: "String"
+  #   Default: "pls comment"
   ScratchDir:
     Description: The name for the runtime scratch data subdirectory
     Type: String
@@ -368,7 +368,9 @@ Resources:
               ### End Install DCV ###
               
             -
-              FSxOntapFS: !Ref EFSDns
+              # FSxOntapFS: !Ref EFSDns
+              FSxOntapFS: 
+                Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"EFSDNS" ] ]
 
   LoginServerRole:
       Type: "AWS::IAM::Role"
