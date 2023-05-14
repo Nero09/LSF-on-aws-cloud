@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  This stack deploys a single-AZ Amazon FSx for NetApp ONTAP file system.
+  
+  **WARNING** This template creates AWS resources. 
+  You will be billed for the AWS resources used if you create a stack from this template.
+
+Parameters:
+
+  LSFClusterName:
+    Description: "The name of the LSF cluster."
+    Type: "String"
+    Default: "LSFCluster"
+
+Resources:
+  FSxForLustre:
+    Type: "AWS::FSx::FileSystem"
+    Properties: 
+      FileSystemType: "LUSTRE"
+      SecurityGroupIds: 
+        - Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"FSxOntapSG" ] ]
+      StorageCapacity: 1200
+      StorageType: SSD
+      SubnetIds: 
+        - Fn::ImportValue: !Join [ '-', [ !Ref LSFClusterName,"PrivateSubnet" ] ]
+      Tags: 
+        - Key: "Name"
+          Value: !Join [ '-', [ !Ref LSFClusterName,"FSxN-FS" ] ]
+      LustreConfiguration: 
+        DeploymentType : PERSISTENT_1
+        PerUnitStorageThroughput: 50
+
+Outputs:
+  FileSystemId:
+    Value: !Ref FSxForLustre
+  MountName:
+    Value: !GetAtt FSxForLustre.LustreMountName
+    Export:
+      Name: !Join [ '-', [ !Ref LSFClusterName,"MountName" ] ]
+  FSxDNSName:
+    Description: DNS Name of the LSF FSx file system
+    Value: 
+      !Join   
+        - '.'
+        - - !Ref FSxForLustre
+          - fsx
+          - !Sub '${AWS::Region}.${AWS::URLSuffix}'
+    Export:
+      Name: !Join [ '-', [ !Ref LSFClusterName,"FSxDNS" ] ]
