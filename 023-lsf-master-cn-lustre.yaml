@@ -397,6 +397,10 @@ Resources:
                                                       --profile="y" \
                                                       --start="y"
 
+              # Environment variable define
+              # echo "$LSF_INSTALL_DIR/conf/profile.lsf" >> ~/.bashrc
+              # source ~/.bashrc
+
               # Verify that LSF is up and send signal to Cloudformation
               sleep 5
               lsid

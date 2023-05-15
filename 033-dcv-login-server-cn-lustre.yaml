@@ -109,7 +109,7 @@ Parameters:
   FileSystemMountPoint:
     Description: The local directory on which the NFS file system is mounted
     Type: String
-    Default: /efs
+    Default: /fsx
     AllowedPattern: ^/.+
   # EFSDns:
   #   Description: DNS of filesystem
