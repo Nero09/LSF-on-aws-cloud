@@ -28,14 +28,14 @@ lsf deployment on AWS
 
 
 ## Deployment:
-1. Run 01-network.yaml via cloudformation
+1. Run 01-network.yaml via cloudformation, wait status create_complete  
 
-2. Run 012-efs.yaml to create EFS shared file storage.
+2. Run 012-efs.yaml to create EFS shared file storage, wait status create_complete  
 
-3. Run 021-lsf-master-cn.yaml via cloudformation
+3. Run 021-lsf-master-cn.yaml via cloudformation, wait status create_complete  
   LSF software path are the S3 buckets where you locate your LSF software & licence.   
 
-4. Run 031-dcv-login-server-cn.yaml via cloudformation
+4. Run 031-dcv-login-server-cn.yaml via cloudformation, wait status create_complete  
 
 In the Stack Failure Options, we recommend choosing **Preserve successfully provisioned resources**. This preserves the resources of the CloudFormation Stack instead of cleaning up stack on deployment failure, thereby facilitating debug. 
 
