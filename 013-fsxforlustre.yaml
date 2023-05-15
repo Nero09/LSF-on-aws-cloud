@@ -44,6 +44,6 @@ Outputs:
         - '.'
         - - !Ref FSxForLustre
           - fsx
-          - !Sub '${AWS::Region}.${AWS::URLSuffix}'
+          - !Sub '${AWS::Region}.amazonaws.com'
     Export:
       Name: !Join [ '-', [ !Ref LSFClusterName,"FSxDNS" ] ]
