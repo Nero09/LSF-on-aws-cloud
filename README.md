@@ -6,7 +6,7 @@ lsf deployment on AWS
 <img width="784" alt="Screenshot 2023-04-27 at 12 35 08" src="https://user-images.githubusercontent.com/40814113/234760295-a3871584-af5c-48fc-bd26-657e9b146d0b.png">
 
 ## Prerequisites:
-1.An AWS account with administrative level access  
+1.An AWS account at **Beijing or Ningxia region** with administrative level access  
 2.Software and Licenses for IBM Spectrum LSF 10.1
 |Kind|IBM Download Source|Description|Package Name|
 |:---|:-----|:----------|------------|
@@ -27,15 +27,28 @@ lsf deployment on AWS
 ![image](https://user-images.githubusercontent.com/40814113/236984672-7e90478b-7f2d-40cd-b6aa-e4b8145579b5.png)
 
 
-## Deployment:
-1. Run 01-network.yaml via cloudformation, wait status create_complete  
+## You can select 1 of blew file systems to deploy
+## A.Deployment with EFS file system:
+1. Run 01-network.yaml via cloudformation, input stack name, choose 1 az, and keep other default. Wait status become "create_complete"  
 
-2. Run 012-efs.yaml to create EFS shared file storage, wait status create_complete  
+2. Run 012-efs.yaml to create EFS shared file storage, input stack name and keep other default. Wait status become "create_complete"  
 
-3. Run 021-lsf-master-cn.yaml via cloudformation, wait status create_complete  
+3. Run 021-lsf-master-cn.yaml via cloudformation, input stack name and choose your keypair, keep other default. Wait status become "create_complete"  
   LSF software path are the S3 buckets where you locate your LSF software & licence.   
 
-4. Run 031-dcv-login-server-cn.yaml via cloudformation, wait status create_complete  
+4. Run 031-dcv-login-server-cn.yaml via cloudformation, input stack name and choose your keypair, keep other default.Wait status become "create_complete"  
+
+In the Stack Failure Options, we recommend choosing **Preserve successfully provisioned resources**. This preserves the resources of the CloudFormation Stack instead of cleaning up stack on deployment failure, thereby facilitating debug. 
+
+## B.Deployment with FSx for Lustre file system:
+1. Run 011-network-lustre.yaml via cloudformation, input stack name, choose 1 az, and keep other default. Wait status become "create_complete"  
+
+2. Run 013-fsxforlustre.yaml to create EFS shared file storage, input stack name and keep other default. Wait status become "create_complete"  
+
+3. Run 023-lsf-master-cn-lustre.yaml via cloudformation, input stack name and choose your keypair, keep other default. Wait status become "create_complete"  
+  LSF software path are the S3 buckets where you locate your LSF software & licence.   
+
+4. Run 033-dcv-login-server-cn-lustre.yaml via cloudformation, input stack name and choose your keypair, keep other default.Wait status become "create_complete"  
 
 In the Stack Failure Options, we recommend choosing **Preserve successfully provisioned resources**. This preserves the resources of the CloudFormation Stack instead of cleaning up stack on deployment failure, thereby facilitating debug. 
 
@@ -67,4 +80,4 @@ In the Stack Failure Options, we recommend choosing **Preserve successfully prov
 ### Clean up
 
 To help prevent unwanted charges to your AWS account, you can delete the AWS resources that you used for this tutorial.
-You can delete stack as sequence 031->021->012->01
+You can delete stack as sequence 031->021->012->01 or 033->023->013-011
