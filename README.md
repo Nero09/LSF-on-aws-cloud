@@ -27,8 +27,8 @@
 ![image](https://user-images.githubusercontent.com/40814113/236984672-7e90478b-7f2d-40cd-b6aa-e4b8145579b5.png)
 
 
-## You can select 1 of blew file systems to deploy
-## A.Deployment with EFS file system:
+## You can select 1 of below file systems to deploy
+### A.Deployment with EFS file system:
 1. Run 01-network.yaml via cloudformation, input stack name, choose 1 az, and keep other default. Wait status become "create_complete"  
 
 2. Run 012-efs.yaml to create EFS shared file storage, input stack name and keep other default. Wait status become "create_complete"  
@@ -40,7 +40,7 @@
 
 In the Stack Failure Options, we recommend choosing **Preserve successfully provisioned resources**. This preserves the resources of the CloudFormation Stack instead of cleaning up stack on deployment failure, thereby facilitating debug. 
 
-## B.Deployment with FSx for Lustre file system:
+### B.Deployment with FSx for Lustre file system:
 1. Run 011-network-lustre.yaml via cloudformation, input stack name, choose 1 az, and keep other default. Wait status become "create_complete"  
 
 2. Run 013-fsxforlustre.yaml to create EFS shared file storage, input stack name and keep other default. Wait status become "create_complete"  
