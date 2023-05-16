@@ -301,6 +301,8 @@ Resources:
               wget https://s3.amazonaws.com/aws-eda-workshop-files/workshops/eda-workshop-lsf/config/lsf/user_data.sh \
                 -O $LSF_INSTALL_DIR/10.1/resource_connector/aws/scripts/user_data.sh
               sed -i 's%mount -t nfs -o rw,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 $FSXN_SVM_DNS_NAME:/vol1 $NFS_MOUNT_POINT%mount -t lustre -o noatime,flock ${FSxOntapFS}@tcp:/${MountName} ${FileSystemMountPoint}%' $LSF_INSTALL_DIR/10.1/resource_connector/aws/scripts/user_data.sh
+              sed -i '/mkdir $NFS_MOUNT_POINT/ichange is row with lustre client installation' $LSF_INSTALL_DIR/10.1/resource_connector/aws/scripts/user_data.sh
+              sed -i 's%change is row with lustre client installation%curl https://fsx-lustre-client-repo-public-keys.s3.amazonaws.com/fsx-rpm-public-key.asc -o /tmp/fsx-rpm-public-key.asc\nrpm --import /tmp/fsx-rpm-public-key.asc\ncurl https://fsx-lustre-client-repo.s3.amazonaws.com/el/7/fsx-lustre-client.repo -o /etc/yum.repos.d/aws-fsx.repo\nyum install -y kmod-lustre-client lustre-client%' $LSF_INSTALL_DIR/10.1/resource_connector/aws/scripts/user_data.sh
               chmod +x $LSF_INSTALL_DIR/10.1/resource_connector/aws/scripts/user_data.sh
 
               # Copy in pre-configured lsf config files

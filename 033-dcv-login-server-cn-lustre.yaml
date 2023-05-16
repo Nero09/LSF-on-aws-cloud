@@ -203,7 +203,7 @@ Resources:
               curl https://fsx-lustre-client-repo-public-keys.s3.amazonaws.com/fsx-rpm-public-key.asc -o /tmp/fsx-rpm-public-key.asc
               rpm --import /tmp/fsx-rpm-public-key.asc
               curl https://fsx-lustre-client-repo.s3.amazonaws.com/el/7/fsx-lustre-client.repo -o /etc/yum.repos.d/aws-fsx.repo
-              sudo yum install -y kmod-lustre-client lustre-client
+              yum install -y kmod-lustre-client lustre-client
 
               # Set DCV username and password
               export SM_PASSWORD=`/usr/local/bin/aws secretsmanager get-secret-value \
