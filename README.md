@@ -1,9 +1,9 @@
 # LSF-on-aws-cloud
-lsf deployment on AWS
 
 ## Architecture
 
-<img width="784" alt="Screenshot 2023-04-27 at 12 35 08" src="https://user-images.githubusercontent.com/40814113/234760295-a3871584-af5c-48fc-bd26-657e9b146d0b.png">
+![LSF diagram drawio](https://github.com/Nero09/LSF-on-aws-cloud/assets/40814113/b0536d88-045a-4e83-b455-55dfe30e0838)
+
 
 ## Prerequisites:
 1.An AWS account at **Beijing or Ningxia region** with administrative level access  
@@ -80,4 +80,4 @@ In the Stack Failure Options, we recommend choosing **Preserve successfully prov
 ### Clean up
 
 To help prevent unwanted charges to your AWS account, you can delete the AWS resources that you used for this tutorial.
-You can delete stack as sequence 031->021->012->01 or 033->023->013-011
+You can delete stack as sequence 031->021->012->01 or 033->023->013->011
